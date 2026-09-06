@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Platform & AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:   #0A1628;
+    --surface:#0F2040;
+    --teal:   #00D4B8;
+    --teal-dim:#00A896;
+    --white:  #F0F4FF;
+    --slate:  #64748B;
+    --muted:  #94A3B8;
+    --border: rgba(100,116,139,0.18);
+    --glow:   0 0 40px rgba(0,212,184,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 4rem;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    color: var(--teal); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--teal); color: var(--navy) !important;
+    padding: 0.45rem 1.1rem; border-radius: 4px; font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--teal-dim); color: var(--navy) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 4rem;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    max-width: 1200px; margin: 0 auto;
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,212,184,0.1);
+    border: 1px solid rgba(0,212,184,0.25);
+    color: var(--teal);
+    font-size: 0.78rem; font-weight: 600;
+    padding: 0.35rem 0.9rem; border-radius: 100px;
+    letter-spacing: 0.04em; margin-bottom: 1.5rem;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--teal); border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .hero h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 700; line-height: 1.1;
+    margin-bottom: 1.25rem;
+    color: var(--white);
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--teal);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem; color: var(--muted);
+    max-width: 520px; margin-bottom: 2rem;
+    line-height: 1.75;
+  }
+
+  .hero-credentials {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    margin-bottom: 2.5rem;
+  }
+  .cred-chip {
+    font-size: 0.78rem; font-weight: 500;
+    padding: 0.3rem 0.75rem; border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    padding: 0.75rem 1.75rem; border-radius: 4px;
+    font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--teal-dim); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--white);
+    padding: 0.75rem 1.75rem; border-radius: 4px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+
+  /* ── HERO STATS CARD ── */
+  .hero-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--glow);
+  }
+  .hero-card-label {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--teal); letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 1.5rem;
+  }
+  .stat-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; padding: 0.9rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .stat-label { font-size: 0.82rem; color: var(--muted); }
+  .stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 600; color: var(--white);
+    text-align: right;
+  }
+  .stat-value.highlight { color: var(--teal); }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--teal); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 700; margin-bottom: 0.75rem;
+  }
+  .section-desc {
+    color: var(--muted); font-size: 1rem;
+    max-width: 580px; margin-bottom: 3rem; line-height: 1.75;
+  }
+
+  /* ── SKILLS / EXPERTISE ── */
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .expertise-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .expertise-card:hover {
+    border-color: rgba(0,212,184,0.3);
+    box-shadow: var(--glow);
+  }
+  .expertise-icon {
+    font-size: 1.4rem; margin-bottom: 0.75rem;
+  }
+  .expertise-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem; font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .expertise-card p {
+    font-size: 0.82rem; color: var(--muted); line-height: 1.65;
+  }
+  .expertise-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.9rem;
+  }
+  .tag {
+    font-size: 0.7rem; padding: 0.2rem 0.55rem;
+    background: rgba(0,212,184,0.08);
+    border: 1px solid rgba(0,212,184,0.15);
+    color: var(--teal); border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: rgba(15,32,64,0.5); max-width: 100%; padding: 6rem 0; }
+  #projects .inner { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.75rem;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover {
+    border-color: rgba(0,212,184,0.35);
+    transform: translateY(-3px);
+  }
+  .project-card.featured {
+    grid-column: span 2;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    align-items: start;
+  }
+  .project-badge {
+    display: inline-block;
+    font-size: 0.68rem; font-weight: 700;
+    padding: 0.2rem 0.6rem; border-radius: 3px;
+    background: rgba(0,212,184,0.15);
+    color: var(--teal); margin-bottom: 0.9rem;
+    letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .project-badge.building {
+    background: rgba(251,191,36,0.1);
+    color: #FBBF24;
+  }
+  .project-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .project-card p {
+    font-size: 0.85rem; color: var(--muted);
+    line-height: 1.7; flex: 1; margin-bottom: 1.25rem;
+  }
+  .project-stack {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem;
+  }
+  .stack-tag {
+    font-size: 0.7rem; padding: 0.2rem 0.55rem;
+    background: var(--navy);
+    border: 1px solid var(--border);
+    color: var(--muted); border-radius: 3px;
+  }
+  .project-links { display: flex; gap: 1rem; margin-top: auto; }
+  .project-link {
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--teal); text-decoration: none;
+    display: flex; align-items: center; gap: 0.3rem;
+    transition: opacity 0.2s;
+  }
+  .project-link:hover { opacity: 0.75; }
+  .project-metrics {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 6px; padding: 1rem;
+  }
+  .metric-item {
+    display: flex; justify-content: space-between;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.8rem;
+  }
+  .metric-item:last-child { border-bottom: none; }
+  .metric-item span:first-child { color: var(--muted); }
+  .metric-item span:last-child { color: var(--teal); font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+
+  /* ── EXPERIENCE TIMELINE ── */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .timeline-item {
+    display: grid; grid-template-columns: 180px 1px 1fr;
+    gap: 0 2rem; padding-bottom: 2.5rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-date {
+    text-align: right;
+    padding-top: 0.2rem;
+  }
+  .timeline-date .year {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem; font-weight: 600; color: var(--teal);
+  }
+  .timeline-date .range {
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .timeline-line {
+    position: relative; display: flex;
+    flex-direction: column; align-items: center;
+  }
+  .timeline-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--teal);
+    border: 2px solid var(--navy);
+    flex-shrink: 0; margin-top: 0.3rem;
+    box-shadow: 0 0 10px rgba(0,212,184,0.4);
+  }
+  .timeline-connector {
+    width: 1px; flex: 1;
+    background: var(--border);
+    margin-top: 4px;
+  }
+  .timeline-item:last-child .timeline-connector { display: none; }
+  .timeline-content { padding-top: 0; }
+  .timeline-company {
+    font-size: 0.75rem; color: var(--teal);
+    font-weight: 600; letter-spacing: 0.05em;
+    text-transform: uppercase; margin-bottom: 0.2rem;
+  }
+  .timeline-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem; font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .timeline-desc {
+    font-size: 0.85rem; color: var(--muted);
+    line-height: 1.7; margin-bottom: 0.75rem;
+  }
+  .timeline-highlights {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .highlight-chip {
+    font-size: 0.72rem; padding: 0.25rem 0.6rem;
+    background: rgba(0,212,184,0.07);
+    border: 1px solid rgba(0,212,184,0.15);
+    color: var(--teal); border-radius: 3px;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+  }
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; padding: 1.25rem;
+    display: flex; align-items: flex-start; gap: 0.9rem;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(0,212,184,0.3); }
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+    background: rgba(0,212,184,0.1);
+  }
+  .cert-info h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem; font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+  .cert-info p {
+    font-size: 0.75rem; color: var(--muted);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    text-align: center;
+    padding: 6rem 4rem;
+    max-width: 700px; margin: 0 auto;
+  }
+  .contact-links {
+    display: flex; justify-content: center;
+    gap: 1.25rem; flex-wrap: wrap; margin-top: 2rem;
+  }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--white); text-decoration: none;
+    font-size: 0.875rem; font-weight: 500;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+    font-size: 0.78rem; color: var(--slate);
+  }
+
+  /* ── DIVIDER ── */
+  .full-divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; }
+    .hero-card { display: none; }
+    section { padding: 4rem 1.5rem; }
+    .expertise-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+    .timeline-item { grid-template-columns: 100px 1px 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    #projects .inner { padding: 0 1.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">platformai.dev</div>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertise</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Open to Senior Platform · TPM · AI Engineer roles · Bengaluru</div>
+    <h1>Platform Engineering<br>meets <em>Applied AI</em></h1>
+    <p class="hero-sub">
+      20 years building and operating enterprise cloud platforms at Oracle scale.
+      MS CS in AI &amp; ML from Arizona State University.
+      Now bridging platform engineering depth with applied LLM systems.
+    </p>
+    <div class="hero-credentials">
+      <span class="cred-chip">MS CS AI/ML — ASU, 3.7 GPA</span>
+      <span class="cred-chip">Oracle OCI · 15 yr</span>
+      <span class="cred-chip">Scrum Master</span>
+      <span class="cred-chip">OCI GenAI Professional</span>
+      <span class="cred-chip">Google AI Professional</span>
+      <span class="cred-chip">3 Cloud Migrations</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-card-label">Profile at a glance</div>
+    <div class="stat-row">
+      <span class="stat-label">Total experience</span>
+      <span class="stat-value highlight">20 years</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Cloud platforms managed</span>
+      <span class="stat-value">OCI · GCP · AWS</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Migrations led end-to-end</span>
+      <span class="stat-value highlight">3</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Automation built</span>
+      <span class="stat-value">Ansible · Python · Bash</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">AI/ML Degree</span>
+      <span class="stat-value highlight">MS CS — ASU</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Certifications</span>
+      <span class="stat-value">9 active</span>
+    </div>
+    <div class="stat-row">
+      <span class="stat-label">Targeting</span>
+      <span class="stat-value">Bengaluru · Remote India</span>
+    </div>
+  </div>
+</div>
+
+<hr class="full-divider">
+
+<!-- EXPERTISE -->
+<section id="expertise">
+  <div class="section-label">What I bring</div>
+  <h2 class="section-title">Deep expertise across three domains</h2>
+  <p class="section-desc">
+    Built over 20 years operating enterprise platforms at scale — now extending into applied AI engineering.
+  </p>
+  <div class="expertise-grid">
+    <div class="expertise-card">
+      <div class="expertise-icon">⚙️</div>
+      <h3>Platform & Release Engineering</h3>
+      <p>15+ years managing Fusion Application platforms on Oracle's own control plane. Monthly patching, quarterly upgrades, operational readiness for enterprise SaaS at global scale.</p>
+      <div class="expertise-tags">
+        <span class="tag">OCI</span>
+        <span class="tag">Release Management</span>
+        <span class="tag">Ansible</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Bash</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">☁️</div>
+      <h3>Cloud Migration & DevOps</h3>
+      <p>Led 3 end-to-end cloud migrations: on-prem → OCI Gen1 → FAaaS control plane, plus Exadata → Autonomous DB and IDM → IDCS. Cross-functional program delivery at Oracle scale.</p>
+      <div class="expertise-tags">
+        <span class="tag">Cloud Migration</span>
+        <span class="tag">DevOps</span>
+        <span class="tag">Scrum Master</span>
+        <span class="tag">Jira</span>
+        <span class="tag">Python</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🤖</div>
+      <h3>Applied AI & LLM Engineering</h3>
+      <p>MS CS in AI/ML from ASU. Building RAG systems, LLM-powered automation tools, and multi-agent pipelines. Experimenting with local models via Ollama and production deployments on GCP Vertex AI.</p>
+      <div class="expertise-tags">
+        <span class="tag">LangChain</span>
+        <span class="tag">RAG</span>
+        <span class="tag">Ollama</span>
+        <span class="tag">Vertex AI</span>
+        <span class="tag">GenAI</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🗄️</div>
+      <h3>Oracle & Enterprise Database</h3>
+      <p>Deep Oracle DB expertise including Exadata operations, Autonomous DB migration, and performance tuning for enterprise-scale transactional systems.</p>
+      <div class="expertise-tags">
+        <span class="tag">Oracle DB</span>
+        <span class="tag">Exadata</span>
+        <span class="tag">Autonomous DB</span>
+        <span class="tag">PL/SQL</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">📋</div>
+      <h3>Technical Program Management</h3>
+      <p>Cross-functional program delivery across engineering, ops, product, and business teams. Stakeholder management at executive level. Agile delivery with Scrum Master certification.</p>
+      <div class="expertise-tags">
+        <span class="tag">TPM</span>
+        <span class="tag">Stakeholder Mgmt</span>
+        <span class="tag">Agile</span>
+        <span class="tag">Risk Management</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🌐</div>
+      <h3>Full-Stack Development</h3>
+      <p>Freelance development of production web applications using React, Node.js, and WordPress. Deployed on Vercel and cloud platforms for real users.</p>
+      <div class="expertise-tags">
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">Vercel</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+<div class="inner">
+  <div class="section-label">Built, not described</div>
+  <h2 class="section-title">Projects</h2>
+  <p class="section-desc">
+    Real systems solving real problems. Each project combines enterprise domain knowledge with applied AI — built locally with Ollama, deployed on GCP.
+  </p>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED -->
+    <div class="project-card featured">
+      <div>
+        <div class="project-badge">Featured</div>
+        <h3>Enterprise RAG Knowledge Assistant</h3>
+        <p>
+          Upload enterprise documents (PDFs, CSVs, SOPs) and query them in natural language.
+          Built with LangChain + ChromaDB for vector storage, tested locally with Ollama (Llama 3),
+          and deployed on GCP Cloud Run using Gemini API in production.
+          Designed for ERP documentation retrieval — answers questions about Fusion application
+          configurations, release notes, and runbooks in under 2 seconds.
+        </p>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">LangChain</span>
+          <span class="stack-tag">ChromaDB</span>
+          <span class="stack-tag">Ollama</span>
+          <span class="stack-tag">Gemini API</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">GCP Cloud Run</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com" class="project-link">↗ GitHub</a>
+          <a href="#" class="project-link">↗ Live Demo</a>
+        </div>
+      </div>
+      <div class="project-metrics">
+        <div class="metric-item">
+          <span>Query response time</span>
+          <span>&lt; 2s</span>
+        </div>
+        <div class="metric-item">
+          <span>Document formats</span>
+          <span>PDF · CSV · DOCX</span>
+        </div>
+        <div class="metric-item">
+          <span>Local model</span>
+          <span>Llama 3 via Ollama</span>
+        </div>
+        <div class="metric-item">
+          <span>Production model</span>
+          <span>Gemini 1.5 Pro</span>
+        </div>
+        <div class="metric-item">
+          <span>Deployment</span>
+          <span>GCP Cloud Run</span>
+        </div>
+        <div class="metric-item">
+          <span>Vector store</span>
+          <span>ChromaDB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 2 -->
+    <div class="project-card">
+      <div class="project-badge">AI + DevOps</div>
+      <h3>LLM-Powered Git Change Impact Analyzer</h3>
+      <p>
+        Extension of an internal Oracle tool. Analyzes git diffs using an LLM to auto-generate
+        risk assessments, release notes, and rollback recommendations. Integrated with GitHub
+        Actions — triggers on every PR. Built on real production pain: manual change risk
+        assessment was taking 2+ hours per release cycle.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">Gemini API</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">GitHub Actions</span>
+        <span class="stack-tag">Docker</span>
+        <span class="stack-tag">GCP Cloud Run</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com" class="project-link">↗ GitHub</a>
+        <a href="#" class="project-link">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 3 -->
+    <div class="project-card">
+      <div class="project-badge">ML + Observability</div>
+      <h3>DB Query Anomaly Detection System</h3>
+      <p>
+        ML-based system that monitors database query patterns and detects anomalies before
+        they become incidents. Uses Isolation Forest for real-time anomaly scoring on query
+        latency, frequency, and error rate time-series. React dashboard with live alerting.
+        Inspired by real Exadata operations experience.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">scikit-learn</span>
+        <span class="stack-tag">PostgreSQL</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">GCP Cloud Functions</span>
+        <span class="stack-tag">BigQuery</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com" class="project-link">↗ GitHub</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 4 -->
+    <div class="project-card">
+      <div class="project-badge building">In Progress</div>
+      <h3>Fusion App Health Monitor with Predictive Alerting</h3>
+      <p>
+        Predictive health monitoring for ERP applications using LSTM time-series forecasting.
+        Predicts performance degradation 15 minutes before threshold breach.
+        React dashboard with real-time alerting integrated with GCP Cloud Monitoring.
+        Built from 15 years of Fusion application observability experience.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">PyTorch</span>
+        <span class="stack-tag">Prophet</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">GCP Cloud Run</span>
+        <span class="stack-tag">GCP Monitoring</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com" class="project-link">↗ GitHub (WIP)</a>
+      </div>
+    </div>
+
+    <!-- PROJECT 5 -->
+    <div class="project-card">
+      <div class="project-badge building">In Progress</div>
+      <h3>Multi-Agent AI Release Orchestrator</h3>
+      <p>
+        Multi-agent system using LangGraph where specialized agents collaborate for automated
+        release validation: a code review agent, a security scan agent, and a documentation
+        agent. Triggered via GitHub Actions on PR events. Reduces manual release validation
+        from hours to minutes.
+      </p>
+      <div class="project-stack">
+        <span class="stack-tag">Python</span>
+        <span class="stack-tag">LangGraph</span>
+        <span class="stack-tag">CrewAI</span>
+        <span class="stack-tag">FastAPI</span>
+        <span class="stack-tag">React</span>
+        <span class="stack-tag">GCP Cloud Run</span>
+        <span class="stack-tag">GitHub Actions</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com" class="project-link">↗ GitHub (WIP)</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<hr class="full-divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Career</div>
+  <h2 class="section-title">20 years at enterprise scale</h2>
+  <p class="section-desc">Platform engineering, cloud operations, and cross-functional program delivery across Oracle and Cognizant.</p>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="year">2022 – Now</div>
+        <div class="range">4 yrs</div>
+      </div>
+      <div class="timeline-line">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-company">Oracle Corporation</div>
+        <div class="timeline-role">Lead Principal Platform Software Engineer</div>
+        <p class="timeline-desc">
+          Managing Fusion Applications on Oracle's own FAaaS control plane. Leading build and release automation modernization across post-refresh, post-upgrade, and DCR workflows. Cross-functional delivery with engineering, product, and business teams globally.
+        </p>
+        <div class="timeline-highlights">
+          <span class="highlight-chip">FAaaS Control Plane</span>
+          <span class="highlight-chip">Build &amp; Release Automation</span>
+          <span class="highlight-chip">Ansible</span>
+          <span class="highlight-chip">Python</span>
+          <span class="highlight-chip">APEX Dashboards</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="year">2015 – 2022</div>
+        <div class="range">7.5 yrs</div>
+      </div>
+      <div class="timeline-line">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-company">Oracle Corporation</div>
+        <div class="timeline-role">Principal Member of Technical Staff</div>
+        <p class="timeline-desc">
+          Led migration of Demo pods from on-prem to OCI Gen1 and later to FAaaS control plane. Managed IDM → IDCS and Exadata → Autonomous DB migrations. Built automation for operational readiness, provisioning, and upgrade workflows.
+        </p>
+        <div class="timeline-highlights">
+          <span class="highlight-chip">OCI Migration</span>
+          <span class="highlight-chip">Exadata → Autonomous DB</span>
+          <span class="highlight-chip">IDM → IDCS</span>
+          <span class="highlight-chip">Release Management</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="year">2011 – 2015</div>
+        <div class="range">3.5 yrs</div>
+      </div>
+      <div class="timeline-line">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-company">Oracle Corporation</div>
+        <div class="timeline-role">Senior IT Consultant</div>
+        <p class="timeline-desc">
+          Distributed systems and enterprise platform support. Cross-functional delivery across Oracle's Fusion application suite.
+        </p>
+        <div class="timeline-highlights">
+          <span class="highlight-chip">Distributed Systems</span>
+          <span class="highlight-chip">Fusion Applications</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-date">
+        <div class="year">2007 – 2011</div>
+        <div class="range">4.5 yrs</div>
+      </div>
+      <div class="timeline-line">
+        <div class="timeline-dot"></div>
+        <div class="timeline-connector"></div>
+      </div>
+      <div class="timeline-content">
+        <div class="timeline-company">Cognizant Technology Solutions</div>
+        <div class="timeline-role">CRM Consultant → Associate CRM → Siebel EIM Consultant</div>
+        <p class="timeline-desc">
+          CRM implementation and consulting across New York and Austin. Siebel CRM EIM data integration, business development, and client delivery.
+        </p>
+        <div class="timeline-highlights">
+          <span class="highlight-chip">Siebel CRM</span>
+          <span class="highlight-chip">EIM</span>
+          <span class="highlight-chip">New York</span>
+          <span class="highlight-chip">Austin TX</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-label">Credentials</div>
+  <h2 class="section-title">Certifications</h2>
+  <p class="section-desc">9 active certifications across AI, cloud, and agile disciplines.</p>
+
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🔵</div>
+      <div class="cert-info">
+        <h4>Google AI Professional Certificate</h4>
+        <p>Google · Issued Mar 2026</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔶</div>
+      <div class="cert-info">
+        <h4>OCI GenAI Professional 2025</h4>
+        <p>Oracle · Issued Mar 2026</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🟣</div>
+      <div class="cert-info">
+        <h4>Certified Scrum Master</h4>
+        <p>Scrum Alliance · Active</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔶</div>
+      <div class="cert-info">
+        <h4>OCI Cloud Developer</h4>
+        <p>Oracle · Active</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🟢</div>
+      <div class="cert-info">
+        <h4>GCP Professional Cloud Architect</h4>
+        <p>Google Cloud · In Progress</p>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔷</div>
+      <div class="cert-info">
+        <h4>+ 5 additional certifications</h4>
+        <p>Oracle Cloud · Active</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- EDUCATION -->
+<section>
+  <div class="section-label">Education</div>
+  <h2 class="section-title">Academic background</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1rem;">
+    <div class="expertise-card">
+      <div class="expertise-icon">🎓</div>
+      <h3>MS Computer Science — AI & ML</h3>
+      <p>Arizona State University · GPA 3.7/4.0<br>Aug 2020 – Aug 2022<br>Specialization: Artificial Intelligence, Machine Learning, Distributed Systems</p>
+      <div class="expertise-tags">
+        <span class="tag">AI · ML</span>
+        <span class="tag">Distributed Systems</span>
+        <span class="tag">GPA 3.7</span>
+      </div>
+    </div>
+    <div class="expertise-card">
+      <div class="expertise-icon">🎓</div>
+      <h3>BE — Computer Science</h3>
+      <p>B.M.S. College of Engineering · Bengaluru<br>2001 – 2005</p>
+      <div class="expertise-tags">
+        <span class="tag">Computer Science</span>
+        <span class="tag">Bengaluru</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="full-divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's connect</div>
+  <h2 class="section-title">Open to the right opportunity</h2>
+  <p style="color:var(--muted);font-size:1rem;line-height:1.75;margin-top:0.5rem;">
+    Targeting Senior Platform Engineer, Technical Program Manager, and AI Engineer roles
+    in Bengaluru or remote India. Available immediately.
+  </p>
+  <div class="contact-links">
+    <a href="https://linkedin.com/in/yourprofile" class="contact-link">
+      <span>💼</span> LinkedIn
+    </a>
+    <a href="https://github.com/yourusername" class="contact-link">
+      <span>🐙</span> GitHub
+    </a>
+    <a href="mailto:your@email.com" class="contact-link">
+      <span>✉️</span> Email
+    </a>
+    <a href="#" class="contact-link">
+      <span>📄</span> Download Resume
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span>platformai.dev</span>
+  <span>Bengaluru, India · Open to work</span>
+</footer>
+
+</body>
+</html>
